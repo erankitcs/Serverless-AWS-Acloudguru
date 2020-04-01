@@ -1,0 +1,58 @@
+service: urlshortner
+frameworkVersion: ">=1.8.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: ${file(../config.${self:provider.stage}.json):urlshortner.profile}
+  environment:
+    TABLE_NAME: ${self:custom.dbTable}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+      Resource:
+        Fn::GetAtt:
+          - LinkDB
+          - Arn
+
+custom:
+  dbTable : ${self:provider.stage}-shortened-urls
+
+functions:
+  main:
+    handler: main/index.handler
+    events:
+      - http:
+         path: /
+         method: get
+  create:
+    handler: create/index.handler
+    events:
+      - http:
+         path: /
+         method: post
+
+  redirect:
+    handler: redirect/index.handler
+    events:
+      - http:
+          path: /{slug}
+          method: get
+
+resources:
+  Resources:
+    LinkDB:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: ${self:custom.dbTable}
+        AttributeDefinitions:
+          - AttributeName: slug
+            AttributeType: S
+        KeySchema:
+          - AttributeName: slug
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
