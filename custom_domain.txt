@@ -1,0 +1,13 @@
+To use the plugin, first make sure you have a package.json file in your service. Run npm init -y to generate one.
+
+npm install serverless-domain-manager --save-dev
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: <registered_domain_name>
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true

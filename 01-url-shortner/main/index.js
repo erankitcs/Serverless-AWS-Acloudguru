@@ -1,4 +1,7 @@
 'use strict';
+
+const env_stage = process.env['ENV_STAGE']
+
 const base_page=`<html>
 <h1>Hi Ankit...</h1>
   <form method="POST" action="">
@@ -8,6 +11,7 @@ const base_page=`<html>
     <br/>
     <input type="submit" value="Shorten it!" />
   </form>
+<p>This is ${env_stage} version.</p>
 </html>
 `
 module.exports.handler= (event, context, callback) =>{

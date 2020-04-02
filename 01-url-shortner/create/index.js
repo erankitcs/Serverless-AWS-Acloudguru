@@ -6,6 +6,7 @@ const path = require('path');
 const crypto = require('crypto')
 AWS.config.setPromisesDependency(Promise)
 const tableName = process.env['TABLE_NAME']
+const env_stage = process.env['ENV_STAGE']
 const docClient = new AWS.DynamoDB.DocumentClient()
 
 function RenderPage(link, submitted){
@@ -18,6 +19,7 @@ function RenderPage(link, submitted){
   <p> URL ${submitted} was shortened to :
     <a href="${link}">${link}</a>
   </p>
+  <p>This is ${env_stage} version.</p>
   </body>
   </html>
   `

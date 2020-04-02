@@ -4,9 +4,10 @@ frameworkVersion: ">=1.8.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: ${file(../config.${self:provider.stage}.json):urlshortner.profile}
+  profile: ${file(../config.${self:custom.stage}.json):urlshortner.profile}
   environment:
     TABLE_NAME: ${self:custom.dbTable}
+    ENV_STAGE: ${self:custom.stage}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -16,9 +17,18 @@ provider:
         Fn::GetAtt:
           - LinkDB
           - Arn
+plugins:
+  - serverless-domain-manager
 
 custom:
-  dbTable : ${self:provider.stage}-shortened-urls
+  dbTable: ${self:custom.stage}-shortened-urls
+  stage: ${opt:stage, self:provider.stage}
+  customDomain:
+    domainName: urls${self:custom.stage}.${file(../config.${self:custom.stage}.json):urlshortner.domain-name}
+    stage: ${self:custom.stage}
+    basePath: ''
+    certificateName: ${file(../config.${self:custom.stage}.json):urlshortner.certificate-name}
+    createRoute53Record: true
 
 functions:
   main:

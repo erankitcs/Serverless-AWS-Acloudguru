@@ -2,6 +2,7 @@
 
 const AWS = require("aws-sdk")
 const tableName = process.env['TABLE_NAME']
+const env_stage = process.env['ENV_STAGE']
 const docClient = new AWS.DynamoDB.DocumentClient()
 
 module.exports.handler = (event, context, callback) => {
