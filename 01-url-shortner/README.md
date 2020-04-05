@@ -1,9 +1,6 @@
-# Serverless-AWS-Acloudguru
-Repository for the A Cloud Guru course *AWS: Serverless framework with GraphQL.*
-
-## URL Shortener:
+# URL Shortener:
 This is a complete serverless application created for shortening the URL.
-### Features
+## Features
 URLShortener currently has the following features:
 
 - Lambda Function: Main -> Screen for submitting the URL to shortening.
@@ -12,8 +9,4 @@ URLShortener currently has the following features:
 - Setup Custom Domain Name with serverless-domain-manager plugin with SSL.
 - Modify the script for Stage based deployment like PROD, DEV, TEST.
 
-![Screenshot](01-url-shortner/urlshortner-arch-diagram.png)
-
-## Glad News:
-A serverless project to share the news.
-### Features
+![Screenshot](urlshortner-arch-diagram.png)
