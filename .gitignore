@@ -1,6 +1,7 @@
 node_modules/
-config.dev.json
-config.prod.json
+config.dev.*
+config.prod.*
+config.js
 *.pem
 .serverless/
 # Byte-compiled / optimized / DLL files

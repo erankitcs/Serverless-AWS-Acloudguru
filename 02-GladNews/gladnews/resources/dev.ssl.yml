@@ -1,0 +1,3 @@
+Type: "AWS::CertificateManager::Certificate"
+Properties:
+  DomainName: "gladnewstest.${self:custom.rootDomain}"
