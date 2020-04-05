@@ -9,4 +9,8 @@ URLShortener currently has the following features:
 - Setup Custom Domain Name with serverless-domain-manager plugin with SSL.
 - Modify the script for Stage based deployment like PROD, DEV, TEST.
 
+Steps to deploy:
+serverless create_domain
+serverless deploy -s <dev/test/prod>
+
 ![Screenshot](urlshortner-arch-diagram.png)
