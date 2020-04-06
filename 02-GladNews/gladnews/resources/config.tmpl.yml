@@ -1,2 +1,6 @@
 gladnews:
-  profile: '' 
+  profile: ''
+  bucketName: ''
+  distributionFolder: ''
+  rootDomain: ''
+  UserPool: ''

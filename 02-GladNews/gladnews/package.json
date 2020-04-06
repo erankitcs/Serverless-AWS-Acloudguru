@@ -1,0 +1,25 @@
+{
+  "name": "GladNews",
+  "version": "1.0.0",
+  "description": "A news website clone",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard",
+    "fixStyle": "standard --fix",
+    "staticDeploy": "python /bin/download_vendor_libs.py serverless client deploy",
+    "staticDestroy": "serverless client remove"
+  },
+  "keywords": [],
+  "author": "Ankit Kumar Singh",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-finch": "^2.5.2",
+    "graphql": "~0.9.1",
+    "lodash": "~4.16.4",
+    "uuid": "~3.0.1"
+  },
+  "devDependencies": {
+    "standard": "*"
+  }
+}

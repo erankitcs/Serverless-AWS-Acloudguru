@@ -5,6 +5,40 @@ provider:
   name: aws
   runtime: nodejs12.x
   profile: ${file(resources/config.${self:custom.stage}.yml):gladnews.profile}
+  environment:
+    ARTICLES_TABLE: {Ref: ArticlesDB}
+    COMMENTS_TABLE: {Ref: CommentsDB}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:Scan
+        - dynamodb:Query
+      Resource:
+       - Fn::GetAtt:
+           - ArticlesDB
+           - Arn
+       - Fn::Join:
+          - ""
+          -
+            - Fn::GetAtt:
+                - ArticlesDB
+                - Arn
+            - "/index/*"
+       - Fn::GetAtt:
+           - CommentsDB
+           - Arn
+       - Fn::Join:
+          - ""
+          -
+            - Fn::GetAtt:
+                - CommentsDB
+                - Arn
+            - "/index/*"
+
 
 functions:
   presign:
@@ -87,6 +121,8 @@ resources:
         ExplicitAuthFlows:
           - ADMIN_NO_SRP_AUTH
         GenerateSecret: false
+    ArticlesDB: ${file(resources/article-db.yml)}
+    CommentsDB: ${file(resources/comment-db.yml)}
     SSLCert: ${file(resources/${self:custom.stage}.ssl.yml)}
     DnsRecords: ${file(resources/${self:custom.stage}.dns.yml)}
     CDN:
@@ -118,3 +154,15 @@ resources:
             MinTTL: 10
             ForwardedValues:
               QueryString: true
+package:
+  exclude:
+    - bin/**
+    - static/**
+    - resources/**
+    - package.json
+    - node_modules/**
+  include:
+    - node_modules/uuid/**
+    - node_modules/lodash/**
+    - node_modules/graphql/**
+    - node_modules/iterall/**
