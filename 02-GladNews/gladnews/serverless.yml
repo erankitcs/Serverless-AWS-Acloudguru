@@ -48,6 +48,17 @@ functions:
           pool: ${self:custom.userPool}
           trigger: PreSignUp
           existing: true
+  gql:
+    handler: backend/gql_endpoint.handler
+    events:
+      - http:
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
+          cors: true
+          path: /gql
+          method: post
   test:
     handler: backend/test_auth.handler
     events:
