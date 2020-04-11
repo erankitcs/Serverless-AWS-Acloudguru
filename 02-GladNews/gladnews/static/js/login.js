@@ -8,7 +8,7 @@ function toggleFeatures(loggedIn) {
       display: "none",
     })
   } else {
-    $('authenticated').css({
+    $('.authenticated').css({
       display: "none",
     })
     $('.anon-only').css({
@@ -25,6 +25,8 @@ document.getElementById('buttonLogin').addEventListener('click' , () => {
     console.log('Successful Login.')
     console.log(result)
     toggleFeatures(true)
+    //Setting User Name
+    set_username()
   }).catch(err => {
     alert('Login failed... !!!'+ err)
   })
@@ -37,7 +39,7 @@ document.getElementById('buttonLogout').addEventListener('click', () => {
   console.log('Logout complete')
 })
 
-
+function set_username(){
 myToken().then(token => {
   toggleFeatures(true)
   console.log('Found user token - turned on authenticated features.')
@@ -47,10 +49,13 @@ myToken().then(token => {
   $('#current-user-name')[0].textContent = user.name
 }).catch( err => {
   toggleFeatures(false)
-  if ( err === 'No user found' ){
+  if ( err === 'No user found.' ){
     console.log('User not logged in - leaving login frame visible')
   }
   else {
     throw err
   }
 })
+}
+
+set_username()

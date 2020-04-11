@@ -7,13 +7,13 @@ def create_directory(dirName):
 	if not os.path.exists(dirName):
 		os.makedirs(dirName)
 		print("Directory " , dirName ,  " Created ")
-	else:    
+	else:
 		print("Directory " , dirName ,  " already exists")
 
 def downloadLibs(libName, libUrl):
 	print('Beginning file download file: {} .'.format(libName))
 	urllib.request.urlretrieve(libUrl, libName)
-	
+
 
 def main():
 	create_directory('../static/js')
@@ -26,6 +26,6 @@ def main():
 	downloadLibs('../static/aws-sdks/aws-sdk.v2.36.0.min.js','https://raw.githubusercontent.com/aws/aws-sdk-js/v2.36.0/dist/aws-sdk.min.js')
 	downloadLibs('../static/aws-sdks/amazon-cognito-sdk.v1.16.0.min.js','https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/v1.16.0/dist/aws-cognito-sdk.min.js')
 	downloadLibs('../static/aws-sdks/amazon-cognito-identity.v1.16.0.min.js','https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/v1.16.0/dist/amazon-cognito-identity.min.js')
-	
+	downloadLibs('../static/js/lodash-4.17.4.min.js','https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js')
 if __name__ == '__main__':
     main()

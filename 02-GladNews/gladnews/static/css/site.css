@@ -5,3 +5,16 @@
 #features>p>.btn {
   min-width: 20em
 }
+
+
+.byline {
+  text-align: right;
+  font-size: smaller;
+  color: #6a9ac3;
+  font-style: oblique;
+}
+
+.commentLink {
+  font-weight: normal;
+  font-size: x-small;
+}

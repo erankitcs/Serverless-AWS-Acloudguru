@@ -3,13 +3,19 @@ const graphql = require('graphql')
 const schema = require('./lib/schema')
 
 function runQuery(query, claims, variables){
-  return graphql.graphql(schema.Schema,query, {claims: claims}, null, variables)
+  //return graphql.graphql(schema.Schema,query, {claims: claims}, null, variables)
+  if (claims === null) {
+   return graphql.graphql(schema.PublicSchema, query, {}, null, variables)
+ }
+ return graphql.graphql(schema.Schema, query, {claims: claims}, null, variables)
 }
 
 module.exports.handler = (event, context, cb) => {
   console.log('Recieved event',JSON.stringify(event))
-  const userInfo = event.requestContext.authorizer.claims
-  console.log(`Event from user ${userInfo.name} with ID ${userInfo.sub}`)
+  var userInfo = null;
+  if (event.requestContext.authorizer) {
+        userInfo = event.requestContext.authorizer.claims
+    }
   const request = JSON.parse(event.body)
   console.log('Query: '+ JSON.stringify(request.query))
   console.log('Variables: '+ JSON.stringify(request.variables))

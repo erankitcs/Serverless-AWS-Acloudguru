@@ -59,6 +59,10 @@ functions:
           cors: true
           path: /gql
           method: post
+      - http:
+          cors: true
+          path: /readgql
+          method: post
   test:
     handler: backend/test_auth.handler
     events:
