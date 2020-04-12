@@ -10,4 +10,4 @@ A serverless project to share the news.
 - GraphQL APIs (Public and Private) using Lambda Function.
 - GraphQL Mutations to insert Article and Comment into DynamoDB.
 
-![Screenshot](02-GladNews/Gladnews_Architecture_Diagram.png)
+![Screenshot](Gladnews_Architecture_Diagram.png)
